@@ -7,7 +7,9 @@ message(STATUS "Using toolchain file " ${CMAKE_TOOLCHAIN_FILE})
 add_definitions(-std=c++11)
 
 include_directories(${LIBOGCDIR}/include)
-link_directories(${DEVKITPRO}/libogc/lib/wii)
+include_directories(${PORTLIBSDIR}/include)
+link_directories(${LIBOGCDIR}/lib/wii)
+link_directories(${PORTLIBSDIR}/lib)
 
 set(MACHDEP "-DGEKKO -mrvl -mcpu=750 -meabi -mhard-float")
 
@@ -19,7 +21,7 @@ add_custom_target(run)
 
 function(add_hwtest module testname filelist)
     add_executable(${module}_${testname} ${filelist} ${COMMON_CODE})
-    target_link_libraries(${module}_${testname} hwtests_common wiiuse bte fat ogc m)
+    target_link_libraries(${module}_${testname} hwtests_common wiiuse bte fat ogc m z)
     add_custom_target(run_${module}_${testname} sh ${CMAKE_SOURCE_DIR}/run.sh ${module}_${testname})
     add_dependencies(run_${module}_${testname} ${module}_${testname})
     add_dependencies(run run_${module}_${testname})
@@ -29,4 +31,5 @@ include_directories(common)
 
 add_subdirectory(common)
 add_subdirectory(cputest)
+add_subdirectory(exitest)
 add_subdirectory(gxtest)

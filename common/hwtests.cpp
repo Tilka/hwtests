@@ -109,7 +109,7 @@ void network_init()
 	socklen_t ssize = sizeof(client_info);
 	client_socket = net_accept(server_socket, (struct sockaddr*)&client_info, &ssize);
 
-	network_printf("Hello world!\n");
+	//network_printf("Hello world!\n");
 }
 
 void network_shutdown()
