@@ -30,7 +30,7 @@ static void FrspTest()
 		u64 input    = values[i][0];
 		u64 expected = values[i][1];
 		u64 result   = 0;
-		asm("frsp %0, %1" : "=f" (result) : "f" (input));
+		asm("frsp %0, %1" : "=d" (result) : "d" (input));
 		DO_TEST(result == expected, "frsp(0x%016llx, NI=%lld):\n"
 		                            "     got 0x%016llx\n"
 		                            "expected 0x%016llx", input, values[i][2] >> 2, result, expected);
